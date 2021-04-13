@@ -29,21 +29,21 @@ public class ScheduleData {
 
     public StringProperty titleProperty() {
     	if(title==null) {
-      	  title = new SimpleStringProperty("TITLE");
+      	  title = new SimpleStringProperty("");
          }
          return title;
     }
 
     public StringProperty timeProperty() {
        if(time==null) {
-    	  time = new SimpleStringProperty("TIME");
+    	  time = new SimpleStringProperty("");
        }
        return time;
     }
 
     public StringProperty detailProperty() {
     	if(detail==null) {
-      	  detail = new SimpleStringProperty("DETAIL");
+      	  detail = new SimpleStringProperty("");
          }
     	return detail;
     }
