@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class ScheduleDataCell extends TableCell<String,ScheduleData> {
+public class ScheduleDataCell extends TableCell<ScheduleData,ScheduleData> {	//セルにscheduleDataをそのまんま渡す
 	   private VBox cellContainer;
 	   private Text scheduleTitle;
 	   private Text time;
@@ -20,6 +20,7 @@ public class ScheduleDataCell extends TableCell<String,ScheduleData> {
 	   
 	   public void initStyle() {
 		   scheduleTitle.setFont(new Font("System Bold", 18.0));
+		   cellContainer.getChildren().addAll(scheduleTitle, time, txtDetail);  //チョー大事
 	   }
 	   
 	   
@@ -43,15 +44,15 @@ public class ScheduleDataCell extends TableCell<String,ScheduleData> {
 	            txtDetail.wrappingWidthProperty().bind(getTableView().widthProperty().subtract(25));
 	            bound = true;
 	        }
-		   		   
+		   		
 		   
 		   if (empty) {
 	            setText(null);
 	            setGraphic(null);
 	        } else { // タイトルやら詳細やらを設定
-	        	scheduleTitle.setText(scheduleData.titleProperty().get());
-	            time.setText(scheduleData.timeProperty().get());
-	            txtDetail.setText(scheduleData.detailProperty().get());
+	        	scheduleTitle.textProperty().bind(scheduleData.titleProperty());
+	            time.textProperty().bind(scheduleData.timeProperty());
+	            txtDetail.textProperty().bind(scheduleData.detailProperty());
 	            setGraphic(cellContainer);
 	        }
 	   }
