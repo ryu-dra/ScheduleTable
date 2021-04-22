@@ -21,12 +21,18 @@
             <CheckBox mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="74.0" />
          </children>
       </AnchorPane>
-      <TableView fx:id="table" prefHeight="400.0" prefWidth="100.0">
-        <columns>
-          <TableColumn fx:id="timeColumn" prefWidth="30.0" text="time" />
-          <TableColumn fx:id="scheduleColumn" prefWidth="70.0" text="shedule" />
-        </columns>
-      </TableView>
+      <BorderPane prefHeight="380.0" prefWidth="100.0">
+         <center>
+            <ListView fx:id="list" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <VBox prefWidth="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="hours" text="Label" />
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
       <TextArea prefHeight="100.0" prefWidth="100.0" text="感想" />
    </children>
 </VBox>

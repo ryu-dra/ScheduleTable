@@ -1,12 +1,12 @@
 package application;
 
-import javafx.scene.control.TableCell;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class ScheduleDataCell extends TableCell<String,ScheduleData> {
+public class ScheduleDataCell extends ListCell<ScheduleData> {	//セルにscheduleDataをそのまんま渡す
 	   private VBox cellContainer;
 	   private Text scheduleTitle;
 	   private Text time;
@@ -20,12 +20,13 @@ public class ScheduleDataCell extends TableCell<String,ScheduleData> {
 	   
 	   public void initStyle() {
 		   scheduleTitle.setFont(new Font("System Bold", 18.0));
+		   cellContainer.getChildren().addAll(scheduleTitle, time, txtDetail);  //チョー大事
 	   }
 	   
 	   
 	   
 	   public void initComponent() {
-		   cellContainer = new VBox(5);		//Nodeを作成
+		   cellContainer = new VBox(5);		//Nodeを作成.三分で１。
 		   scheduleTitle = new Text();
 		   VBox.setVgrow(scheduleTitle, Priority.NEVER);
 		   time = new Text();
@@ -38,21 +39,23 @@ public class ScheduleDataCell extends TableCell<String,ScheduleData> {
 	   public void updateItem(ScheduleData scheduleData, boolean empty) {
 		   super.updateItem(scheduleData, empty);
 		   if (!bound) { // セルの幅に合わせて折り返されるように、親となる ListView の width プロパティと、それぞれの wrappingWidth プロパティをバインドしています。
-	            scheduleTitle.wrappingWidthProperty().bind(getTableView().widthProperty().subtract(25));
-	            time.wrappingWidthProperty().bind(getTableView().widthProperty().subtract(25));
-	            txtDetail.wrappingWidthProperty().bind(getTableView().widthProperty().subtract(25));
+	            scheduleTitle.wrappingWidthProperty().bind(getListView().widthProperty().subtract(25));
+	            time.wrappingWidthProperty().bind(getListView().widthProperty().subtract(25));
+	            txtDetail.wrappingWidthProperty().bind(getListView().widthProperty().subtract(25));
 	            bound = true;
 	        }
-		   		   
+		   		
 		   
 		   if (empty) {
 	            setText(null);
 	            setGraphic(null);
 	        } else { // タイトルやら詳細やらを設定
-	        	scheduleTitle.setText(scheduleData.titleProperty().get());
-	            time.setText(scheduleData.timeProperty().get());
-	            txtDetail.setText(scheduleData.detailProperty().get());
+	        	scheduleTitle.textProperty().bind(scheduleData.titleProperty());
+	            time.textProperty().bind(scheduleData.timeProperty());
+	            txtDetail.textProperty().bind(scheduleData.detailProperty());
 	            setGraphic(cellContainer);
 	        }
+		   
+		   
 	   }
 }
