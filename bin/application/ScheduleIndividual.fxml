@@ -6,10 +6,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="150.0" styleClass="ScheduleTable" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceduleTableController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="130.0" styleClass="ScheduleTable" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SceduleTableController">
    <children>
-      <AnchorPane prefHeight="100.0" prefWidth="100.0">
+      <AnchorPane prefHeight="100.0" prefWidth="130.0">
          <children>
             <Label text="日付" textAlignment="CENTER" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
                <font>
@@ -21,15 +22,44 @@
             <CheckBox mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="74.0" />
          </children>
       </AnchorPane>
-      <ScrollPane prefHeight="400.0" prefWidth="150.0" vbarPolicy="ALWAYS">
+      <ScrollPane prefHeight="400.0" prefWidth="130.0" vbarPolicy="ALWAYS">
          <content>
-            <Pane fx:id="pane" prefHeight="720.0" prefWidth="150.0">
+            <HBox minWidth="130.0" prefHeight="740.0" prefWidth="130.0">
                <children>
-                  <Label fx:id="spanOfTime" prefHeight="17.0" prefWidth="30.0" text="00:00" />
+                  <AnchorPane prefHeight="740.0" prefWidth="30.0">
+                     <children>
+                        <Label text="0:00" AnchorPane.topAnchor="0.0" />
+                        <Label text="1:00" AnchorPane.topAnchor="30.0" />
+                        <Label text="2:00" AnchorPane.topAnchor="60.0" />
+                        <Label text="3:00" AnchorPane.topAnchor="90.0" />
+                        <Label text="4:00" AnchorPane.topAnchor="120.0" />
+                        <Label text="5:00" AnchorPane.topAnchor="150.0" />
+                        <Label text="6:00" AnchorPane.topAnchor="180.0" />
+                        <Label text="7:00" AnchorPane.topAnchor="210.0" />
+                        <Label text="8:00" AnchorPane.topAnchor="240.0" />
+                        <Label text="9:00" AnchorPane.topAnchor="270.0" />
+                        <Label text="10:00" AnchorPane.topAnchor="300.0" />
+                        <Label text="11:00" AnchorPane.topAnchor="330.0" />
+                        <Label text="12:00" AnchorPane.topAnchor="360.0" />
+                        <Label text="13:00" AnchorPane.topAnchor="390.0" />
+                        <Label text="14:00" AnchorPane.topAnchor="420.0" />
+                        <Label text="15:00" AnchorPane.topAnchor="450.0" />
+                        <Label text="16:00" AnchorPane.topAnchor="480.0" />
+                        <Label text="17:00" AnchorPane.topAnchor="510.0" />
+                        <Label text="18:00" AnchorPane.topAnchor="540.0" />
+                        <Label text="19:00" AnchorPane.topAnchor="570.0" />
+                        <Label text="20:00" AnchorPane.topAnchor="600.0" />
+                        <Label text="21:00" AnchorPane.topAnchor="630.0" />
+                        <Label text="22:00" AnchorPane.topAnchor="660.0" />
+                        <Label text="23:00" AnchorPane.topAnchor="690.0" />
+                        <Label text="24:00" AnchorPane.topAnchor="720.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="aPane" prefHeight="740.0" prefWidth="100.0" />
                </children>
-            </Pane>
+            </HBox>
          </content>
       </ScrollPane>
-      <TextArea prefHeight="100.0" prefWidth="150.0" text="感想" />
+      <TextArea prefHeight="100.0" prefWidth="130.0" text="感想" />
    </children>
 </VBox>

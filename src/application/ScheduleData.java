@@ -2,16 +2,17 @@ package application;
 
 import java.time.LocalTime;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 /**
  * ブックマークを表すモデル.
  */
-public class ScheduleData  {
-    private StringProperty title = new SimpleStringProperty();
-    private StringProperty time = new SimpleStringProperty();
-    private StringProperty detail = new SimpleStringProperty();
+public class ScheduleData {
+    private String title = new String();
+    private String time = new String();
+    private String detail = new String();
+    private LocalTime startTime;
+    private LocalTime finishTime;
+    
+    
 
     /**
      * コンストラクタ.
@@ -21,30 +22,35 @@ public class ScheduleData  {
      * @param detail 詳細
      */
     public ScheduleData(String title,LocalTime startTime, LocalTime finishTime, String detail) {
-    	this.title.set(title);    	
-    	this.time.set(startTime+"～"+finishTime);
-        this.detail.set(detail);
+    	this.title=title;    	
+    	this.time=startTime+"～"+finishTime;
+        this.detail=detail;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
     }
-
-    public StringProperty titleProperty() {
-    	if(title==null) {
-      	  title = new SimpleStringProperty("TITLE");
-         }
+    
+    
+    public String gettitle() {
+    	
          return title;
     }
 
-    public StringProperty timeProperty() {
-       if(time==null) {
-    	  time = new SimpleStringProperty("TIME");
-       }
+    public String gettime() {
+       
        return time;
     }
 
-    public StringProperty detailProperty() {
-    	if(detail==null) {
-      	  detail = new SimpleStringProperty("DETAIL");
-         }
+    public String getDetail() {
+    	
     	return detail;
+    }
+    
+    public LocalTime getsTime() {
+    	return startTime;
+    }
+    
+    public LocalTime getfTime() {
+    	return finishTime;
     }
     
     
