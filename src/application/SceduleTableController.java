@@ -8,12 +8,13 @@ import java.net.URL;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-public class SceduleTableController {
+public class SceduleTableController  {
 
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -27,6 +28,14 @@ public class SceduleTableController {
     
     @FXML // fx:id="aPane"
     private AnchorPane aPane; // Value injected by FXMLLoader
+    
+    @FXML // fx:id="aPane"
+    private VBox scheduleIndividual; // Value injected by FXMLLoader
+    
+    @FXML
+    void sets(ActionEvent event) {
+    	
+    }
 
 
     @SuppressWarnings("static-access")

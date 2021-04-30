@@ -46,7 +46,7 @@ public class ScheduleDataCell extends ListCell<ScheduleData> {	//セルにschedu
 	        }
 		   		
 		   
-/*		   if (empty) {
+		   /* if (empty) {
 	            setText(null);
 	            setGraphic(null);
 	        } else { // タイトルやら詳細やらを設定

@@ -12,7 +12,7 @@ public class SceduleMain extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			VBox root = (VBox)FXMLLoader.load(getClass().getResource("ScheduleIndividual.fxml"));
-			Scene scene = new Scene(root,100,600);			
+			Scene scene = new Scene(root,150,600);			
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
