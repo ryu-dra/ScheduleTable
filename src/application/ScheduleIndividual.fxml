@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root fx:id="scheduleIndividual" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="130.0" styleClass="ScheduleTable" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleTableController">
+<VBox fx:id="scheduleIndividual" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="130.0" styleClass="ScheduleTable"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleTableController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="130.0">
          <children>
@@ -60,4 +60,4 @@
       </ScrollPane>
       <TextArea prefHeight="100.0" prefWidth="130.0" text="感想" />
    </children>
-</fx:root>
+</VBox>

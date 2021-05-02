@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="scheduleSelect" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleTableController">
+<AnchorPane fx:id="scheduleSelect" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleSelectController">
    <children>
       <Label layoutX="77.0" layoutY="14.0" prefHeight="27.0" prefWidth="127.0" text="予定を追加する" textAlignment="CENTER" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
          <font>
