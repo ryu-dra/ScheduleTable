@@ -52,8 +52,8 @@ public class ScheduleTableController  {
     
     void showSecondWindow() throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ScheduleSelect.fxml"));
-		AnchorPane root = (AnchorPane) loader.load();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleSelect.fxml"));
+		AnchorPane root = (AnchorPane) fxmlLoader.load();
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene);

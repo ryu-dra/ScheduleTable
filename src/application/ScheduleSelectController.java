@@ -1,5 +1,11 @@
 package application;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 
 import javafx.fxml.FXML;
@@ -57,6 +63,8 @@ public class ScheduleSelectController {
 	    @FXML
 	    void jikkou(MouseEvent event) {
 	    	addScheduleLabel(addData());
+	    	save();
+	    	System.out.println("追加しました。");
 	    }
 	    
 	    ScheduleData addData() {
@@ -67,6 +75,7 @@ public class ScheduleSelectController {
 	       	var sd = new ScheduleData(name, sTime, fTime, detail);
 	    	return sd;
 	    }
+	    
 	    
 	    @SuppressWarnings("static-access")
 		void addScheduleLabel(ScheduleData data) {
@@ -82,5 +91,43 @@ public class ScheduleSelectController {
 	 		controller.getaPane().setTopAnchor(sLabel, stNum);
 	 		sLabel.setPrefHeight(tNum);
 	 		}
+	    
+	    @FXML private void initialize() throws IOException {
+	    	if(!isEmpty()) {
+	    		addScheduleLabel(loading().getSd());
+	    	}
+		}
+	    
+	    void save() {
+	    	var data = new SaveData();
+	    	data.setSd(addData());
+	    	try {
+	    		FileOutputStream fos = new FileOutputStream("SaveDataFile.dat");
+	    		ObjectOutputStream oos = new ObjectOutputStream(fos);
+	    		oos.writeObject(data);
+	    		oos.close();
+	    	}catch (Exception e) {
+				System.out.println("Error");
+			}
+	    }
+	    
+	    SaveData loading() {
+		    	var data = new SaveData();
+		    	try {
+		    		FileInputStream fos = new FileInputStream("SaveDataFile.dat");
+		    		ObjectInputStream oos = new ObjectInputStream(fos);
+		    		SaveData saveData = (SaveData) oos.readObject();
+		    		oos.close();
+		    		return saveData;
+		    	}catch (Exception e) {
+					return null;
+				}
+	   	}
+	    
+	    boolean isEmpty() throws IOException {
+	    	File file = new File("SaveDataFile.dat") ;
+	    	boolean empty = !file.exists() || file.length()==0;
+	    	return empty;
+	    }
 
 }

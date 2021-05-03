@@ -2,10 +2,12 @@ package application;
 
 import java.time.LocalTime;
 
+
+
 /**
  * ブックマークを表すモデル.
  */
-public class ScheduleData {
+public class ScheduleData  {
     private String title = new String();
     private String time = new String();
     private String detail = new String();

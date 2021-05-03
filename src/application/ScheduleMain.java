@@ -12,7 +12,6 @@ public class ScheduleMain extends Application {
 
 	public static ScheduleTableController stController;
 	
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
