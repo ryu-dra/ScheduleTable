@@ -73,11 +73,10 @@ public class ScheduleTableController  {
 	@FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
    		
+		
  		
- 		
-    	 
- 				
         assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'ScheduleIndividual.fxml'.";
        
     }
+	
 }

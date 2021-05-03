@@ -1,10 +1,7 @@
 package application;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 
@@ -93,41 +90,17 @@ public class ScheduleSelectController {
 	 		}
 	    
 	    @FXML private void initialize() throws IOException {
-	    	if(!isEmpty()) {
-	    		addScheduleLabel(loading().getSd());
-	    	}
+	    	
 		}
 	    
+	    
 	    void save() {
-	    	var data = new SaveData();
-	    	data.setSd(addData());
-	    	try {
-	    		FileOutputStream fos = new FileOutputStream("SaveDataFile.dat");
-	    		ObjectOutputStream oos = new ObjectOutputStream(fos);
-	    		oos.writeObject(data);
-	    		oos.close();
-	    	}catch (Exception e) {
-				System.out.println("Error");
+	    	
+	    	try (var out = new ObjectOutputStream(new FileOutputStream( "SaveDataFile.ser"))){
+	    		out.writeObject(addData());
+	    	}catch (IOException e) {
+				e.printStackTrace();
 			}
 	    }
 	    
-	    SaveData loading() {
-		    	var data = new SaveData();
-		    	try {
-		    		FileInputStream fos = new FileInputStream("SaveDataFile.dat");
-		    		ObjectInputStream oos = new ObjectInputStream(fos);
-		    		SaveData saveData = (SaveData) oos.readObject();
-		    		oos.close();
-		    		return saveData;
-		    	}catch (Exception e) {
-					return null;
-				}
-	   	}
-	    
-	    boolean isEmpty() throws IOException {
-	    	File file = new File("SaveDataFile.dat") ;
-	    	boolean empty = !file.exists() || file.length()==0;
-	    	return empty;
-	    }
-
 }

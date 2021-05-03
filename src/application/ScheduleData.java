@@ -1,21 +1,18 @@
 package application;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-
-
-/**
- * ブックマークを表すモデル.
- */
-public class ScheduleData  {
+public class ScheduleData  implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
     private String title = new String();
     private String time = new String();
     private String detail = new String();
     private LocalTime startTime;
     private LocalTime finishTime;
     
-    
-
     /**
      * コンストラクタ.
      * @param title スケジュールのタイトル
