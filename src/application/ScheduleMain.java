@@ -2,8 +2,13 @@ package application;
 	
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +22,8 @@ public class ScheduleMain extends Application {
 	
 
 	public static ScheduleTableController stController;
+	public static ScheduleSelectController ssController;
+	public static List<ScheduleData> list = new ArrayList<ScheduleData>();
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -28,7 +35,11 @@ public class ScheduleMain extends Application {
 			
 			try {
 				if(!isEmpty()) {
-					initScheduleLabel(loading());
+					List<ScheduleData> initList = loading();
+					for(ScheduleData sd : initList) {
+						list.add(sd);
+						initScheduleLabel(sd);
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -40,6 +51,12 @@ public class ScheduleMain extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		 primaryStage.showingProperty().addListener((observable, oldValue, newValue) -> {
+	            if (oldValue == true && newValue == false) {
+	                saveStatus();
+	            }
+	        });
 	}
 	
 	public static void main(String[] args) {
@@ -52,11 +69,22 @@ public class ScheduleMain extends Application {
     	return empty;
     }
 	
-	ScheduleData loading() {
-    	try (var in = new ObjectInputStream(new FileInputStream("SaveDataFile.ser"))){
-    		var saveData = (ScheduleData)in.readObject();
-    		return saveData;
-    	}catch (Exception e) {
+	@SuppressWarnings("unchecked")
+	List<ScheduleData> loading() {
+		try(var in = new ObjectInputStream(new FileInputStream("SaveDataFile.ser"))){
+			var initList = (List<ScheduleData>) in.readObject();
+			return initList;
+		} catch (FileNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -69,10 +97,20 @@ public class ScheduleMain extends Application {
 	 	double tNum = ftNum-stNum;
 	 	String str = data.gettitle()+"\n"+data.gettime()+"\n"+data.getDetail();
 	 	sLabel.setText(str);
-	 	
+	 	sLabel.setStyle("-fx-background-color:#CCCCCC;");
 	 	stController.getaPane().getChildren().add(sLabel);
 	 	stController.getaPane().setTopAnchor(sLabel, stNum);
 	 	sLabel.setPrefHeight(tNum);
 	 		
+	}
+	
+	void saveStatus() {
+		 try (var out = new ObjectOutputStream(new FileOutputStream( "SaveDataFile.ser"))){
+             if(list != null) {
+            	 out.writeObject(list);
+             }
+         }catch (IOException e) {
+             e.printStackTrace();
+         }
 	}
 }

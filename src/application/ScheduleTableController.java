@@ -54,6 +54,7 @@ public class ScheduleTableController  {
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleSelect.fxml"));
 		AnchorPane root = (AnchorPane) fxmlLoader.load();
+		ScheduleMain.ssController = fxmlLoader.getController();
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene);

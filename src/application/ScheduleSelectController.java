@@ -1,8 +1,6 @@
 package application;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 
 import javafx.fxml.FXML;
@@ -26,10 +24,10 @@ public class ScheduleSelectController {
 	    private Button sakusei; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="packageSelect"
-	    private ComboBox<?> packageSelect; // Value injected by FXMLLoader
+	    private ComboBox<String> packageSelect; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="month"
-	    private ComboBox<?> month; // Value injected by FXMLLoader
+	    private ComboBox<String> month; // Value injected by FXMLLoader
 
 	    @FXML // fx:id="scheduleSelct"
 	    private AnchorPane scheduleSelect; // Value injected by FXMLLoader
@@ -51,6 +49,7 @@ public class ScheduleSelectController {
 
 	    @FXML // fx:id="day"
 	    private ComboBox<String> day; // Value injected by FXMLLoader
+	    
 
 	    @FXML
 	    void clickMemo(MouseEvent event) {
@@ -59,8 +58,9 @@ public class ScheduleSelectController {
 	    
 	    @FXML
 	    void jikkou(MouseEvent event) {
-	    	addScheduleLabel(addData());
-	    	save();
+	    	var editData = addData();
+	    	addScheduleLabel(editData);
+	    	ScheduleMain.list.add(editData);
 	    	System.out.println("追加しました。");
 	    }
 	    
@@ -92,15 +92,6 @@ public class ScheduleSelectController {
 	    @FXML private void initialize() throws IOException {
 	    	
 		}
-	    
-	    
-	    void save() {
-	    	
-	    	try (var out = new ObjectOutputStream(new FileOutputStream( "SaveDataFile.ser"))){
-	    		out.writeObject(addData());
-	    	}catch (IOException e) {
-				e.printStackTrace();
-			}
-	    }
+	    //実行されるたびにListを展開して、新しいListに加える（Mainで）。
 	    
 }
