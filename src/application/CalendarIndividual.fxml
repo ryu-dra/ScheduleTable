@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CalendarController">
+   <center>
+      <VBox prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="hiduke" prefHeight="150.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label fx:id="tuki" alignment="CENTER" text="Month" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold Italic" size="39.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <GridPane fx:id="calendarMatrix" alignment="CENTER" gridLinesVisible="true" prefHeight="410.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <TabPane prefWidth="150.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="file" text="File">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="カレンダーを表示する（dPickerで）" AnchorPane.bottomAnchor="461.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="65.0" />
+                        <Button layoutX="15.0" layoutY="251.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="ToDoリスト" />
+                        <Button layoutX="15.0" layoutY="168.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="週予定を開く" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="colors" text="Colors">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Tools">
+              <content>
+                <AnchorPane fx:id="tools" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="15.0" layoutY="46.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="タグを編集する" />
+                        <Button layoutX="15.0" layoutY="146.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="タグを確認する" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </left>
+   <right>
+      <AnchorPane prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Pane prefHeight="50.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

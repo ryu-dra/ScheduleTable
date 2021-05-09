@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +53,13 @@ public class ScheduleMain extends Application {
 			e.printStackTrace();
 		}
 		
-		 primaryStage.showingProperty().addListener((observable, oldValue, newValue) -> {
-	            if (oldValue == true && newValue == false) {
-	                saveStatus();
-	            }
-	        });
+		//終了時のイベント
+		primaryStage.showingProperty().addListener((observable, oldValue, newValue) -> {
+	         if (oldValue == true && newValue == false) {
+	             saveStatus();
+	         }
+	     });
+		 
 	}
 	
 	public static void main(String[] args) {
@@ -91,17 +94,21 @@ public class ScheduleMain extends Application {
 	
 	@SuppressWarnings("static-access")
 	void initScheduleLabel(ScheduleData data) {
-	    var sLabel = new Label();
-	 	double stNum = (data.getsTime().getHour()+data.getsTime().getMinute()/60)*30+4;
-	 	double ftNum = (data.getfTime().getHour()+data.getfTime().getMinute()/60)*30+4;
+	 	double stNum = (data.getStartTime().getHour()+data.getStartTime().getMinute()/60)*30+4;
+	 	double ftNum = (data.getFinishTime().getHour()+data.getFinishTime().getMinute()/60)*30+4;
 	 	double tNum = ftNum-stNum;
-	 	String str = data.gettitle()+"\n"+data.gettime()+"\n"+data.getDetail();
-	 	sLabel.setText(str);
-	 	sLabel.setStyle("-fx-background-color:#CCCCCC;");
-	 	stController.getaPane().getChildren().add(sLabel);
-	 	stController.getaPane().setTopAnchor(sLabel, stNum);
-	 	sLabel.setPrefHeight(tNum);
-	 		
+	 	String str = data.getTitle()+"\n"+data.gettime()+"\n"+data.getDetail();
+	 	
+	 	//日付を指定
+	 	var ld = LocalDate.of(data.getYear(),data.getMonth(),data.getDate());
+	 	if(ld.equals(LocalDate.of(1, 2, 4)))	{	//ここにカレンダーの日付と等しいか判断。
+	 		var sLabel = new Label();
+		 	sLabel.setText(str);
+		 	sLabel.setStyle("-fx-background-color:#CCCCCC;");
+		 	stController.getaPane().getChildren().add(sLabel);
+		 	stController.getaPane().setTopAnchor(sLabel, stNum);
+		 	sLabel.setPrefHeight(tNum);
+	 	}
 	}
 	
 	void saveStatus() {

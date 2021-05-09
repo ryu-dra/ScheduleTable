@@ -12,45 +12,110 @@ public class ScheduleData  implements Serializable{
     private String detail = new String();
     private LocalTime startTime;
     private LocalTime finishTime;
+    private int year;
+    private int month;
+    private int date;
+    private String packageSelect;
     
     /**
      * コンストラクタ.
+     * @param year 年
+     * @param month 月
+     * @param date 日
      * @param title スケジュールのタイトル
      * @param startTime 開始時間
      * @param finishTime 終了時刻
      * @param detail 詳細
+     * @param packageSelect パッケージ
      */
-    public ScheduleData(String title,LocalTime startTime, LocalTime finishTime, String detail) {
-    	this.title=title;    	
-    	this.time=startTime+"～"+finishTime;
-        this.detail=detail;
-        this.startTime = startTime;
-        this.finishTime = finishTime;
-    }
-    
-    
-    public String gettitle() {
-    	
-         return title;
+    public ScheduleData(int year,int month,int date,String title,LocalTime startTime, LocalTime finishTime, String detail,String packageSelect) {
+    	this.setYear(year);
+    	this.setMonth(month);
+    	this.setDate(date);
+    	this.setTitle(title);    	
+    	this.setTime(startTime+"～"+finishTime);
+        this.setDetail(detail);
+        this.setStartTime(startTime);
+        this.setFinishTime(finishTime);
+        this.setPackageSelect(packageSelect);
     }
 
-    public String gettime() {
-       
-       return time;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getDetail() {
-    	
-    	return detail;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalTime getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(LocalTime finishTime) {
+		this.finishTime = finishTime;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDate() {
+		return date;
+	}
+
+	public void setDate(int date) {
+		this.date = date;
+	}
+
+	public String getPackageSelect() {
+		return packageSelect;
+	}
+
+	public void setPackageSelect(String packageSelect) {
+		this.packageSelect = packageSelect;
+	}
     
-    public LocalTime getsTime() {
-    	return startTime;
-    }
-    
-    public LocalTime getfTime() {
-    	return finishTime;
-    }
+	public String gettime() {
+	       
+	       return time;
+	    }
     
     
 }

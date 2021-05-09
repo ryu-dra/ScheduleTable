@@ -6,21 +6,25 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="scheduleIndividual" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="130.0" styleClass="ScheduleTable"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleTableController">
+<VBox fx:id="scheduleIndividual" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="130.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleTableController">
    <children>
-      <AnchorPane prefHeight="100.0" prefWidth="130.0">
-         <children>
-            <Label text="日付" textAlignment="CENTER" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+      <ToolBar prefHeight="35.0" prefWidth="130.0">
+         <items>
+            <Label fx:id="hizuke" alignment="CENTER" prefHeight="23.0" prefWidth="116.0" text="1月1日月曜日" textAlignment="CENTER">
                <font>
-                  <Font name="Monospaced Regular" size="18.0" />
+                  <Font name="Kalam" size="14.0" />
                </font>
             </Label>
-            <CheckBox mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-            <CheckBox mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
-            <CheckBox mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="74.0" />
+         </items>
+      </ToolBar>
+      <AnchorPane prefHeight="111.0" prefWidth="130.0">
+         <children>
+            <CheckBox layoutX="20.0" layoutY="14.0" mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0" />
+            <CheckBox layoutX="20.0" layoutY="39.0" mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0" />
+            <CheckBox layoutX="20.0" layoutY="65.0" mnemonicParsing="false" text="CheckBox" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0" />
          </children>
       </AnchorPane>
-      <ScrollPane prefHeight="400.0" prefWidth="130.0" vbarPolicy="ALWAYS">
+      <ScrollPane prefHeight="390.0" prefWidth="130.0" vbarPolicy="ALWAYS">
          <content>
             <HBox minWidth="130.0" prefHeight="740.0" prefWidth="130.0">
                <children>
@@ -58,6 +62,6 @@
             </HBox>
          </content>
       </ScrollPane>
-      <TextArea prefHeight="100.0" prefWidth="130.0" text="感想" />
+      <TextArea prefHeight="120.0" prefWidth="130.0" text="感想" />
    </children>
 </VBox>

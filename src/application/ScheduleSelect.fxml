@@ -20,7 +20,7 @@
       <Label layoutX="17.0" layoutY="259.0" text="メモ" />
       <ComboBox fx:id="packageSelect" editable="true" layoutX="66.0" layoutY="51.0" prefHeight="25.0" prefWidth="121.0" promptText="新規作成の場合は入力" />
       <TextField fx:id="scheduleName" layoutX="64.0" layoutY="89.0" prefHeight="25.0" prefWidth="127.0" />
-      <ComboBox fx:id="year" layoutX="53.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
+      <ComboBox fx:id="year" editable="true" layoutX="53.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="107.0" layoutY="133.0" prefHeight="17.0" prefWidth="14.0" text="年" />
       <Label layoutX="224.0" layoutY="93.0" text="＊必須" />
       <Label layoutX="248.0" layoutY="160.0" text="＊必須" />
@@ -46,8 +46,8 @@
       <TextArea fx:id="memo" layoutX="53.0" layoutY="259.0" onMouseClicked="#clickMemo" prefHeight="91.0" prefWidth="226.0" />
       <Button fx:id="sakusei" layoutX="113.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#jikkou" prefHeight="27.0" prefWidth="64.0" text="作成" />
       <Label layoutX="180.0" layoutY="133.0" prefHeight="17.0" prefWidth="14.0" text="月" />
-      <ComboBox fx:id="month" layoutX="125.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
-      <ComboBox fx:id="day" layoutX="197.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
+      <ComboBox fx:id="month" editable="true" layoutX="125.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
+      <ComboBox fx:id="day" editable="true" layoutX="197.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="252.0" layoutY="133.0" prefHeight="17.0" prefWidth="14.0" text="日" />
    </children>
 </AnchorPane>
