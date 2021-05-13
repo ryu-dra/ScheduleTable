@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 public class CalendarController {
 	
 	static LocalDate ld;
+	public static ScheduleTableController stController;
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -125,9 +126,57 @@ public class CalendarController {
     }
     
     void showScheduleTable() throws IOException  {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleIndividual.fxml"));
-		VBox root = (VBox) fxmlLoader.load();
-		Scene scene = new Scene(root,130,670);
+    	var scn = new ScheduleConnection();
+		var dao = new ScheduleDAO(scn.getConnection());
+	
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleIndividual.fxml"));
+			Scene scene;
+			try {
+				scene = new Scene((VBox)fxmlLoader.load(),150,600);		
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				stController = fxmlLoader.getController();
+			
+				List<ScheduleData> initList = dao.findByDate(ld);
+				for(ScheduleData sd : initList) {
+					initScheduleLabel(sd);
+				}
+				
+				Stage primaryStage = new Stage();
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+    }
+    
+    @SuppressWarnings("static-access")
+	void initScheduleLabel(ScheduleData data) {
+	 	double stNum = (data.getStartTime().getHour()+data.getStartTime().getMinute()/60)*30+4;
+	 	double ftNum = (data.getFinishTime().getHour()+data.getFinishTime().getMinute()/60)*30+4;
+	 	double tNum = ftNum-stNum;
+	 	String str = data.getTitle()+"\n"+data.gettime()+"\n"+data.getDetail();
+	 	
+	 	var sLabel = new Label();
+	 	sLabel.setText(str);
+	 	sLabel.setOnMouseClicked(event -> {
+			try {
+				showEditWindow();
+			} catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		});
+	 	sLabel.setStyle("-fx-background-color:#CCCCCC;");		 	
+	 	stController.getaPane().getChildren().add(sLabel);
+		stController.getaPane().setTopAnchor(sLabel, stNum);
+		sLabel.setPrefHeight(tNum);
+	}
+    
+    void showEditWindow() throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleEdit.fxml"));
+		AnchorPane root = (AnchorPane) fxmlLoader.load();
+		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		stage.showAndWait();

@@ -1,20 +1,19 @@
 package application;
 
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ScheduleData  implements Serializable{
+
+//DTOクラス
+
+public class ScheduleData {
 	
-	private static final long serialVersionUID = 1L;
-	
-    private String title = new String();
-    private String time = new String();
-    private String detail = new String();
+    private String title = null;
+    private String time = null;
+    private String detail = null;
     private LocalTime startTime;
     private LocalTime finishTime;
-    private int year;
-    private int month;
-    private int date;
+    private LocalDate date;
     private String packageSelect;
     
     /**
@@ -28,10 +27,8 @@ public class ScheduleData  implements Serializable{
      * @param detail 詳細
      * @param packageSelect パッケージ
      */
-    public ScheduleData(int year,int month,int date,String title,LocalTime startTime, LocalTime finishTime, String detail,String packageSelect) {
-    	this.setYear(year);
-    	this.setMonth(month);
-    	this.setDate(date);
+    public ScheduleData(LocalDate ld,String title,LocalTime startTime, LocalTime finishTime, String detail,String packageSelect) {
+    	this.setDate(ld);
     	this.setTitle(title);    	
     	this.setTime(startTime+"～"+finishTime);
         this.setDetail(detail);
@@ -46,6 +43,14 @@ public class ScheduleData  implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+	
+	public LocalDate gettDate() {
+		return date;
 	}
 
 	public String getTime() {
@@ -80,30 +85,7 @@ public class ScheduleData  implements Serializable{
 		this.finishTime = finishTime;
 	}
 
-	public int getYear() {
-		return year;
-	}
-
-	public void setYear(int year) {
-		this.year = year;
-	}
-
-	public int getMonth() {
-		return month;
-	}
-
-	public void setMonth(int month) {
-		this.month = month;
-	}
-
-	public int getDate() {
-		return date;
-	}
-
-	public void setDate(int date) {
-		this.date = date;
-	}
-
+	
 	public String getPackageSelect() {
 		return packageSelect;
 	}

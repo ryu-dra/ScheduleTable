@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class ScheduleTableController  {
 
 	static LocalDate ld;
-	
+	static ScheduleSelectController ssController;
 	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -57,17 +57,13 @@ public class ScheduleTableController  {
 
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleSelect.fxml"));
 		AnchorPane root = (AnchorPane) fxmlLoader.load();
-		ScheduleMain.ssController = fxmlLoader.getController();
+		ssController = fxmlLoader.getController();
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		stage.showAndWait();
-
-	}
+    }
     
-    
-	
-
 	public AnchorPane getaPane() {
 		return aPane;
 	}

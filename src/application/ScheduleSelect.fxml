@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="scheduleSelect" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ScheduleSelectController">
    <children>
-      <Label layoutX="77.0" layoutY="14.0" prefHeight="27.0" prefWidth="127.0" text="予定を追加する" textAlignment="CENTER" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="14.0">
+      <Label layoutX="57.0" layoutY="14.0" prefHeight="27.0" prefWidth="189.0" text="予定を追加・編集する" textAlignment="CENTER" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -43,11 +43,12 @@
       </Label>
       <ComboBox fx:id="fHour" editable="true" layoutX="125.0" layoutY="198.0" prefHeight="25.0" prefWidth="50.0" />
       <ComboBox fx:id="fMinute" editable="true" layoutX="181.0" layoutY="197.0" prefHeight="25.0" prefWidth="36.0" />
-      <TextArea fx:id="memo" layoutX="53.0" layoutY="259.0" onMouseClicked="#clickMemo" prefHeight="91.0" prefWidth="226.0" />
-      <Button fx:id="sakusei" layoutX="113.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#jikkou" prefHeight="27.0" prefWidth="64.0" text="作成" />
+      <TextArea fx:id="memo" layoutX="53.0" layoutY="259.0" prefHeight="91.0" prefWidth="226.0" />
+      <Button fx:id="sakusei" layoutX="71.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#jikkou" prefHeight="27.0" prefWidth="64.0" text="作成" />
       <Label layoutX="180.0" layoutY="133.0" prefHeight="17.0" prefWidth="14.0" text="月" />
       <ComboBox fx:id="month" editable="true" layoutX="125.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
       <ComboBox fx:id="day" editable="true" layoutX="197.0" layoutY="129.0" prefHeight="25.0" prefWidth="50.0" />
       <Label layoutX="252.0" layoutY="133.0" prefHeight="17.0" prefWidth="14.0" text="日" />
+      <Button layoutX="161.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="25.0" prefWidth="64.0" text="編集" />
    </children>
 </AnchorPane>
