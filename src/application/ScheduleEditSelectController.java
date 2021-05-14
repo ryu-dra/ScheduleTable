@@ -3,10 +3,10 @@ package application;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -64,13 +64,15 @@ public class ScheduleEditSelectController {
 	    
 
 	    @FXML
-	    void edit(MouseEvent event) {	
+	    void edit(MouseEvent event) {
 	    	int oldYear = Integer.parseInt(this.oldYear.getValue());
 	    	int oldMonth = Integer.parseInt(this.oldMonth.getValue());
 	    	int oldDay = Integer.parseInt(this.oldDay.getValue());
 	    	String oldName = this.oldName.getValue();
 	    	dao.update(LocalDate.of(oldYear,oldMonth,oldDay),oldName,addData());
-	    	
+	    	ScheduleEditController.editStage.close();
+	    	AddDataAndLabel.stage.close();
+	    	new AddDataAndLabel().createScheduleLabel(addData(), CalendarController.stController.getaPane());
 	    }
 	    
 	    ScheduleData addData() {
@@ -78,6 +80,10 @@ public class ScheduleEditSelectController {
 	    	int month = Integer.parseInt(this.month.getValue());
 	    	int date = Integer.parseInt(this.day.getValue());
 	    	String packageSelect = this.packageSelect.getValue();
+	    	var kuran = "\\s*";
+	    	if(Pattern.matches(kuran,scheduleName.getText() )) {
+	    		scheduleName.setText(oldName.getValue());
+	    	}
 	    	String name = scheduleName.getText();
 	    	var sTime = LocalTime.of(Integer.parseInt(sHour.getValue()),Integer.parseInt(sMinute.getValue()));
 	    	var fTime = LocalTime.of(Integer.parseInt(fHour.getValue()),Integer.parseInt(fMinute.getValue()));
@@ -85,22 +91,6 @@ public class ScheduleEditSelectController {
 	       	var sd = new ScheduleData(LocalDate.of(year, month, date),name, sTime, fTime, detail,packageSelect);
 	    	return sd;
 	    }
-	    
-	    
-	    @SuppressWarnings("static-access")
-		void addScheduleLabel(ScheduleData data) {
-	    	var sLabel = new Label();
-	 		double stNum = (data.getStartTime().getHour()+data.getStartTime().getMinute()/60)*30+4;
-	 	    double ftNum = (data.getFinishTime().getHour()+data.getFinishTime().getMinute()/60)*30+4;
-	 	    double tNum = ftNum-stNum;
-	 		String str = data.getTitle()+"\n"+data.gettime()+"\n"+data.getDetail();
-	 		sLabel.setText(str);
-	 		
-	 		ScheduleTableController controller = CalendarController.stController;	 		
-	 		controller.getaPane().getChildren().add(sLabel);
-	 		controller.getaPane().setTopAnchor(sLabel, stNum);
-	 		sLabel.setPrefHeight(tNum);
-	 		}
 	    
 	    @SuppressWarnings("static-access")
 		@FXML private void initialize() throws IOException {
@@ -111,6 +101,11 @@ public class ScheduleEditSelectController {
 	    	oldMonth.setValue(Integer.toString(ld.getMonthValue()));
 	    	day.setValue(Integer.toString(ld.getDayOfMonth()));
 	    	oldDay.setValue(Integer.toString(ld.getDayOfMonth()));
+	    	oldName.setValue(AddDataAndLabel.titleOfLabel.get());
+	    	sHour.setValue(Integer.toString(AddDataAndLabel.startTime.get().getHour()));
+	    	sMinute.setValue(Integer.toString(AddDataAndLabel.startTime.get().getMinute()));
+	    	fHour.setValue(Integer.toString(AddDataAndLabel.finishTime.get().getHour()));
+	    	fMinute.setValue(Integer.toString(AddDataAndLabel.finishTime.get().getMinute()));
 	    	System.out.println(year.getEditor());
 		}
 	    

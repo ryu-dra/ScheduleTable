@@ -26,6 +26,7 @@ public class CalendarController {
 	
 	static LocalDate ld;
 	public static ScheduleTableController stController;
+	
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -58,6 +59,8 @@ public class CalendarController {
     int date;
 
     int lastDate;
+    
+    CreateDataAndLabel adal = new AddDataAndLabel();
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
@@ -138,9 +141,8 @@ public class CalendarController {
 			
 				List<ScheduleData> initList = dao.findByDate(ld);
 				for(ScheduleData sd : initList) {
-					initScheduleLabel(sd);
+					adal.createScheduleLabel(sd,stController.getaPane());
 				}
-				
 				Stage primaryStage = new Stage();
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -149,38 +151,5 @@ public class CalendarController {
 				e.printStackTrace();
 			}
     }
-    
-    @SuppressWarnings("static-access")
-	void initScheduleLabel(ScheduleData data) {
-	 	double stNum = (data.getStartTime().getHour()+data.getStartTime().getMinute()/60)*30+4;
-	 	double ftNum = (data.getFinishTime().getHour()+data.getFinishTime().getMinute()/60)*30+4;
-	 	double tNum = ftNum-stNum;
-	 	String str = data.getTitle()+"\n"+data.gettime()+"\n"+data.getDetail();
-	 	
-	 	var sLabel = new Label();
-	 	sLabel.setText(str);
-	 	sLabel.setOnMouseClicked(event -> {
-			try {
-				showEditWindow();
-			} catch (IOException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
-		});
-	 	sLabel.setStyle("-fx-background-color:#CCCCCC;");		 	
-	 	stController.getaPane().getChildren().add(sLabel);
-		stController.getaPane().setTopAnchor(sLabel, stNum);
-		sLabel.setPrefHeight(tNum);
-	}
-    
-    void showEditWindow() throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleEdit.fxml"));
-		AnchorPane root = (AnchorPane) fxmlLoader.load();
-		Scene scene = new Scene(root);
-		Stage stage = new Stage();
-		stage.setScene(scene);
-		stage.showAndWait();
-    }
-
     
 }

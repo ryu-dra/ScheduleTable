@@ -79,12 +79,12 @@ public class ScheduleDAO {
 			String sql = "INSERT INTO datatable VALUES(?,?,?,?,?,?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
-			stmt.setDate(1, Date.valueOf(sd.gettDate()));;
-			stmt.setString(2,sd.getTitle());
-			stmt.setTime(3,Time.valueOf(sd.getStartTime()));
-			stmt.setTime(4,Time.valueOf(sd.getFinishTime()));
-			stmt.setString(5,sd.getDetail());
-			stmt.setString(6,sd.getPackageSelect());
+			stmt.setDate(1, Date.valueOf(sd.dateProperty().get()));;
+			stmt.setString(2,sd.titleProperty().get());
+			stmt.setTime(3,Time.valueOf(sd.startTimeProperty().get()));
+			stmt.setTime(4,Time.valueOf(sd.finishTimeProperty().get()));
+			stmt.setString(5,sd.detailProperty().get());
+			stmt.setString(6,sd.packageSelectProperty().get());
 			
 
 			stmt.executeUpdate();
@@ -98,12 +98,12 @@ public class ScheduleDAO {
 		try{
 			String sql = "UPDATE datatable SET startTime=?,finishTime=?,detail=?,packageSelect=?,date=?,title=? WHERE date=? AND title =?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setTime(1,Time.valueOf(newSd.getStartTime()));
-			stmt.setTime(2,Time.valueOf(newSd.getFinishTime()));
-			stmt.setString(3,newSd.getDetail());
-			stmt.setString(4,newSd.getPackageSelect());
-			stmt.setDate(5, Date.valueOf(newSd.gettDate()));;
-			stmt.setString(6,newSd.getTitle());
+			stmt.setTime(1,Time.valueOf(newSd.startTimeProperty().get()));
+			stmt.setTime(2,Time.valueOf(newSd.finishTimeProperty().get()));
+			stmt.setString(3,newSd.detailProperty().get());
+			stmt.setString(4,newSd.packageSelectProperty().get());
+			stmt.setDate(5, Date.valueOf(newSd.dateProperty().get()));;
+			stmt.setString(6,newSd.titleProperty().get());
 			stmt.setDate(7, Date.valueOf(oldDate));
 			stmt.setString(8,oldTitle);
 			stmt.executeUpdate();

@@ -42,6 +42,8 @@ public class ScheduleDeleteController {
     	int day = Integer.parseInt(this.day.getValue());
     	String name = this.name.getValue();
     	dao.delete(LocalDate.of(year,month,day),name);
+    	ScheduleEditController.stage.close();
+    	AddDataAndLabel.stage.close();
     }
 
     @SuppressWarnings("static-access")
@@ -51,6 +53,7 @@ public class ScheduleDeleteController {
     	year.setValue(Integer.toString(ld.getYear()));
     	month.setValue(Integer.toString(ld.getMonthValue()));
     	day.setValue(Integer.toString(ld.getDayOfMonth()));
+    	name.setValue(AddDataAndLabel.titleOfLabel.get());
     	System.out.println(year.getEditor());
 
     }

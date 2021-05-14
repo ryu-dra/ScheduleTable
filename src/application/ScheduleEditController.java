@@ -16,7 +16,9 @@ import javafx.stage.Stage;
 
 public class ScheduleEditController {
 	
-	static ScheduleEditController sec;
+	public static ScheduleEditController sec;
+	public static Stage stage;
+	public static Stage editStage;
 	
 	@FXML
     private ResourceBundle resources;
@@ -24,7 +26,8 @@ public class ScheduleEditController {
     @FXML
     private URL location;
     
-    
+    @FXML
+    private AnchorPane scheduleEdit;
 
     @FXML
     void DELETE(MouseEvent event) {
@@ -49,7 +52,7 @@ public class ScheduleEditController {
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleEditSelect.fxml"));
     		AnchorPane root = (AnchorPane) fxmlLoader.load();
     		Scene scene = new Scene(root);
-    		Stage stage = new Stage();
+    		editStage = new Stage();
     		stage.setScene(scene);
     		stage.showAndWait();
 		} catch(Exception e) {
@@ -62,11 +65,15 @@ public class ScheduleEditController {
     		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScheduleDelete.fxml"));
     		AnchorPane root = (AnchorPane) fxmlLoader.load();
     		Scene scene = new Scene(root);
-    		Stage stage = new Stage();
+    		stage = new Stage();
     		stage.setScene(scene);
     		stage.showAndWait();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
     }
+
+	public AnchorPane getScheduleEdit() {
+		return scheduleEdit;
+	}
 }

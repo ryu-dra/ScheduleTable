@@ -3,18 +3,27 @@ package application;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 
 //DTOクラス
 
 public class ScheduleData {
 	
-    private String title = null;
-    private String time = null;
-    private String detail = null;
-    private LocalTime startTime;
-    private LocalTime finishTime;
-    private LocalDate date;
-    private String packageSelect;
+    private StringProperty title = new SimpleStringProperty();
+    private String time = new String();
+    private StringProperty detail = new SimpleStringProperty();
+    private ObjectProperty<LocalTime> startTime = new SimpleObjectProperty<LocalTime>();
+    private ObjectProperty<LocalTime> finishTime = new SimpleObjectProperty<LocalTime>();
+    private ObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
+    private StringProperty packageSelect = new SimpleStringProperty();
+
+    private DoubleBinding ftNum;
+    private DoubleBinding tNum;
     
     /**
      * コンストラクタ.
@@ -28,76 +37,76 @@ public class ScheduleData {
      * @param packageSelect パッケージ
      */
     public ScheduleData(LocalDate ld,String title,LocalTime startTime, LocalTime finishTime, String detail,String packageSelect) {
-    	this.setDate(ld);
-    	this.setTitle(title);    	
+    	this.date.set(ld);
+    	this.title.set(title);    	
     	this.setTime(startTime+"～"+finishTime);
-        this.setDetail(detail);
-        this.setStartTime(startTime);
-        this.setFinishTime(finishTime);
-        this.setPackageSelect(packageSelect);
+        this.detail.set(detail);
+        this.startTime.set(startTime);
+        this.finishTime.set(finishTime);
+        this.packageSelect.set(packageSelect);
     }
 
-	public String getTitle() {
-		return title;
-	}
 
-	public void setTitle(String title) {
+   
+    
+    
+    
+	public void setTitle(StringProperty title) {
 		this.title = title;
 	}
 	
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	
-	public LocalDate gettDate() {
-		return date;
+	public StringProperty titleProperty() {
+		return title;
 	}
 
 	public String getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setTime(String string) {
+		this.time = string;
 	}
 
-	public String getDetail() {
+	public void setDetail(StringProperty detail) {
+		this.detail = detail;
+	}
+	
+	public StringProperty detailProperty() {
 		return detail;
 	}
 
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setStartTime(ObjectProperty<LocalTime> startTime) {
+		this.startTime = startTime;
 	}
-
-	public LocalTime getStartTime() {
+	
+	public ObjectProperty<LocalTime> startTimeProperty() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
+	public void setFinishTime(ObjectProperty<LocalTime> finishTime) {
+		this.finishTime = finishTime;
 	}
-
-	public LocalTime getFinishTime() {
+	
+	public ObjectProperty<LocalTime> finishTimeProperty() {
 		return finishTime;
 	}
 
-	public void setFinishTime(LocalTime finishTime) {
-		this.finishTime = finishTime;
+	public void setDate(ObjectProperty<LocalDate> date) {
+		this.date = date;
 	}
 
+	public ObjectProperty<LocalDate> dateProperty() {
+		return date;
+	}
 	
-	public String getPackageSelect() {
+	public void setPackageSelect(StringProperty packageSelect) {
+		this.packageSelect = packageSelect;
+	}
+	
+	public StringProperty packageSelectProperty() {
 		return packageSelect;
 	}
 
-	public void setPackageSelect(String packageSelect) {
-		this.packageSelect = packageSelect;
-	}
-    
-	public String gettime() {
-	       
-	       return time;
-	    }
-    
+	
     
 }
