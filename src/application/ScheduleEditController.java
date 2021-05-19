@@ -53,8 +53,8 @@ public class ScheduleEditController {
     		AnchorPane root = (AnchorPane) fxmlLoader.load();
     		Scene scene = new Scene(root);
     		editStage = new Stage();
-    		stage.setScene(scene);
-    		stage.showAndWait();
+    		editStage.setScene(scene);
+    		editStage.showAndWait();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

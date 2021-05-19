@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.regex.Pattern;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
@@ -61,6 +63,8 @@ public class ScheduleEditSelectController {
 	    
 	    private ScheduleConnection scn = new ScheduleConnection();
 		private ScheduleDAO dao = new ScheduleDAO(scn.getConnection());
+		private PackagesDAO pdao = new PackagesDAO(scn.getConnection());
+		
 	    
 
 	    @FXML
@@ -107,6 +111,10 @@ public class ScheduleEditSelectController {
 	    	fHour.setValue(Integer.toString(AddDataAndLabel.finishTime.get().getHour()));
 	    	fMinute.setValue(Integer.toString(AddDataAndLabel.finishTime.get().getMinute()));
 	    	System.out.println(year.getEditor());
+	    	
+	    	ObservableList<String> pItems = FXCollections.observableArrayList();
+	    	pItems.addAll(pdao.find());
+	    	packageSelect.setItems(pItems);
 		}
 	    
 }

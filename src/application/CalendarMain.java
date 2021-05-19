@@ -14,10 +14,10 @@ public class CalendarMain extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CalendarIndividual.fxml"));
 		Scene scene = new Scene((BorderPane)fxmlLoader.load(),700,600);	
 		cController = fxmlLoader.getController();
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("Calendar.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
+		
 	}
 
 	public static void main(String[] args) {

@@ -15,8 +15,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -42,6 +45,9 @@ public class ScheduleTableController  {
     
     @FXML 
     private Label hizuke;
+    
+    @FXML
+    private Label limage;
     
     @FXML
     void sets(MouseEvent event) {
@@ -75,8 +81,12 @@ public class ScheduleTableController  {
     void initialize() {
    		ld = CalendarMain.cController.ld;
    		hizuke.setText(ld.format(DateTimeFormatter.ofPattern("M月d日E曜日",Locale.JAPAN)));
- 		
-        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'ScheduleIndividual.fxml'.";
+   		Image image = new Image("file:./src/img/IMG_0044.JPG",0,limage.getPrefHeight(),true,true);
+   		BackgroundImage bing = new BackgroundImage(image,null,null,null,null);
+   		Background bg = new Background(bing);
+   		limage.setBackground(bg);
+   		
+        
        
     }
 	

@@ -3,7 +3,6 @@ package application;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,9 +20,6 @@ public class ScheduleData {
     private ObjectProperty<LocalTime> finishTime = new SimpleObjectProperty<LocalTime>();
     private ObjectProperty<LocalDate> date = new SimpleObjectProperty<LocalDate>();
     private StringProperty packageSelect = new SimpleStringProperty();
-
-    private DoubleBinding ftNum;
-    private DoubleBinding tNum;
     
     /**
      * コンストラクタ.

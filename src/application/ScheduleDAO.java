@@ -17,6 +17,7 @@ public class ScheduleDAO {
 		this.con = con;
 	}
 	
+	
 	public ArrayList<ScheduleData> findAll(){
 		ArrayList<ScheduleData> list = new ArrayList<ScheduleData>();
 		try{
@@ -31,8 +32,85 @@ public class ScheduleDAO {
 				String detail = rs.getString("detail");
 				String packageSelect = rs.getString("packageSelect");
 				
-
 				var sd = new ScheduleData(date,title,startTime,finishTime,detail,packageSelect);
+				list.add(sd);
+			}
+
+			rs.close();
+			stmt.close();
+		}
+		catch (SQLException e) {
+			System.out.println("SELECTエラー：" + e.getMessage());
+		}
+		return list;
+	}
+	
+	public ArrayList<String> findMonoTitle(){
+		ArrayList<String> list = new ArrayList<String>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT  DISTINCT title from datatable");
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				String title = rs.getString("title");
+				
+				
+
+				var sd = title;
+				list.add(sd);
+			}
+
+			rs.close();
+			stmt.close();
+		}
+		catch (SQLException e) {
+			System.out.println("SELECTエラー：" + e.getMessage());
+		}
+		return list;
+	}
+	
+	public ArrayList<String> findMonoTitleFuture(){
+		ArrayList<String> list = new ArrayList<String>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT  DISTINCT title from datatable where date >= ?");
+			stmt.setDate(1, Date.valueOf(LocalDate.now()));
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				String title = rs.getString("title");
+				
+				
+
+				var sd = title;
+				list.add(sd);
+			}
+
+			rs.close();
+			stmt.close();
+		}
+		catch (SQLException e) {
+			System.out.println("SELECTエラー：" + e.getMessage());
+		}
+		return list;
+	}
+	
+	public ArrayList<ScheduleData> findByDateCompare(LocalDate date){
+		ArrayList<ScheduleData> list = new ArrayList<ScheduleData>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * from datatable where date >= ?");
+			stmt.setDate(1, Date.valueOf(date));
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				var ymd = rs.getDate("date").toLocalDate();
+				String title = rs.getString("title");
+				LocalTime startTime = rs.getTime("startTime").toLocalTime();
+				LocalTime finishTime = rs.getTime("finishTime").toLocalTime();
+				String detail = rs.getString("detail");
+				String packageSelect = rs.getString("packageSelect");
+				
+
+				var sd = new ScheduleData(ymd,title,startTime,finishTime,detail,packageSelect);
 				list.add(sd);
 			}
 
@@ -74,8 +152,79 @@ public class ScheduleDAO {
 		return list;
 	}
 	
+	public ArrayList<ScheduleData> findByPackage(String package_){
+		ArrayList<ScheduleData> list = new ArrayList<ScheduleData>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * from datatable where packageSelect = ?");
+			stmt.setString(1, package_);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				var ymd = rs.getDate("date").toLocalDate();
+				String title = rs.getString("title");
+				LocalTime startTime = rs.getTime("startTime").toLocalTime();
+				LocalTime finishTime = rs.getTime("finishTime").toLocalTime();
+				String detail = rs.getString("detail");
+				String packageSelect = rs.getString("packageSelect");
+				
+
+				var sd = new ScheduleData(ymd,title,startTime,finishTime,detail,packageSelect);
+				list.add(sd);
+			}
+
+			rs.close();
+			stmt.close();
+		}
+		catch (SQLException e) {
+			System.out.println("SELECTエラー：" + e.getMessage());
+		}
+		return list;
+	}
+	
+	public ArrayList<ScheduleData> findByPackageFuture(String package_,LocalDate ld){
+		ArrayList<ScheduleData> list = new ArrayList<ScheduleData>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * from datatable where packageSelect = ? AND date >= ?");
+			stmt.setString(1, package_);
+			stmt.setDate(2, Date.valueOf(ld));
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				var ymd = rs.getDate("date").toLocalDate();
+				String title = rs.getString("title");
+				LocalTime startTime = rs.getTime("startTime").toLocalTime();
+				LocalTime finishTime = rs.getTime("finishTime").toLocalTime();
+				String detail = rs.getString("detail");
+				String packageSelect = rs.getString("packageSelect");
+				
+
+				var sd = new ScheduleData(ymd,title,startTime,finishTime,detail,packageSelect);
+				list.add(sd);
+			}
+
+			rs.close();
+			stmt.close();
+		}
+		catch (SQLException e) {
+			System.out.println("SELECTエラー：" + e.getMessage());
+		}
+		return list;
+	}
+	
 	public void insert(ScheduleData sd) {
 		try{
+			String packSql1 = "SELECT package_ FROM packages WHERE package_ = ?";
+			PreparedStatement p1 = con.prepareStatement(packSql1);
+			p1.setString(1, sd.packageSelectProperty().get());
+			ResultSet rs = p1.executeQuery();
+			while (rs.next()) {
+				String packageSelect = rs.getString("package_");
+				if(packageSelect != null) {
+					System.out.println("重複するパッケージが存在します。");
+					return;
+				}
+			}
+			
 			String sql = "INSERT INTO datatable VALUES(?,?,?,?,?,?)";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
@@ -85,8 +234,6 @@ public class ScheduleDAO {
 			stmt.setTime(4,Time.valueOf(sd.finishTimeProperty().get()));
 			stmt.setString(5,sd.detailProperty().get());
 			stmt.setString(6,sd.packageSelectProperty().get());
-			
-
 			stmt.executeUpdate();
 		}
 		catch (SQLException e) {

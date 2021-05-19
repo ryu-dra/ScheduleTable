@@ -2,6 +2,8 @@ package application;
 
 import java.io.IOException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 
 public class ScheduleSelectController {
 	
-		static 
 
 	 	@FXML // fx:id="scheduleName"
 	    private TextField scheduleName; // Value injected by FXMLLoader
@@ -52,16 +53,18 @@ public class ScheduleSelectController {
 	    
 	    private ScheduleConnection scn = new ScheduleConnection();
 		private ScheduleDAO dao = new ScheduleDAO(scn.getConnection());
-		CreateDataAndLabel adl = new AddDataAndLabel();
+		private PackagesDAO pdao = new PackagesDAO(scn.getConnection());
+		CreateDataAndLabel adal = new AddDataAndLabel();
 	    
 
 	    
 	    
 	    @FXML
 	    void jikkou(MouseEvent event) {
-	    	var editData = adl.addData(packageSelect, year, month, day, scheduleName, sHour, sMinute, fHour, fMinute, scheduleSelect, memo);
-	    	adl.createScheduleLabel(editData, CalendarController.stController.getaPane());
+	    	var editData = adal.addData(packageSelect, year, month, day, scheduleName, sHour, sMinute, fHour, fMinute, scheduleSelect, memo);
+	    	adal.createScheduleLabel(editData, CalendarController.stController.getaPane());
 	    	dao.insert(editData);
+	    	pdao.insert(editData.packageSelectProperty().get());
 	    	System.out.println("追加しました。");
 	    	
 	    }
@@ -74,7 +77,22 @@ public class ScheduleSelectController {
 	    	year.setValue(Integer.toString(ld.getYear()));
 	    	month.setValue(Integer.toString(ld.getMonthValue()));
 	    	day.setValue(Integer.toString(ld.getDayOfMonth()));
-	    	System.out.println(year.getEditor());
+	    	ObservableList<String> pItems = FXCollections.observableArrayList();
+	    	pItems.addAll(pdao.find());
+	    	packageSelect.setItems(pItems);
+	    	
+	    	ObservableList<String> hItems = FXCollections.observableArrayList();
+	    	for(int i=0;i<24;i++) {
+	    		hItems.add(Integer.toString(i));
+	    	}
+	    	ObservableList<String> mItems = FXCollections.observableArrayList();
+	    	for(int i=0;i<60;i++) {
+	    		mItems.add(Integer.toString(i));
+	    	}
+	    	sHour.setItems(hItems);
+	    	sMinute.setItems(mItems);
+	    	fHour.setItems(hItems);
+	    	fMinute.setItems(mItems);
 		}
 	   
 }
