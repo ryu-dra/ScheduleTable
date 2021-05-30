@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,16 +22,16 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class CalendarController {
 	
@@ -74,6 +75,9 @@ public class CalendarController {
     @FXML
     private DatePicker dp;
     
+    @FXML
+    private ListView<PackAndColorData> packColor;
+    
     int year;
 
     int month;
@@ -85,7 +89,8 @@ public class CalendarController {
     CreateDataAndLabel adal = new AddDataAndLabel();
     private ScheduleConnection scn = new ScheduleConnection();
 	private ScheduleDAO dao = new ScheduleDAO(scn.getConnection());
-	private PackagesDAO pdao = new PackagesDAO(scn.getConnection());	    
+	private PackagesDAO pdao = new PackagesDAO(scn.getConnection());	
+	private ObservableList<String> pItems = FXCollections.observableArrayList();
 
 	 @FXML
 	 void toDo(MouseEvent event) throws IOException {
@@ -145,6 +150,7 @@ public class CalendarController {
 	 
 	 @FXML
 	 void reload(MouseEvent event) {
+		 ld = LocalDate.now();
 		 calendarMatrix.getChildren().clear();
 		 calendarMatrix.setGridLinesVisible(false);
 		 calendarMatrix.setGridLinesVisible(true);
@@ -168,6 +174,9 @@ public class CalendarController {
 	    		label.setPrefWidth(Integer.MAX_VALUE);
 	    	}
 		 setCalendar(ld);
+		 
+		 pItems.clear();
+		 pItems.addAll(pdao.find());
 	 }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -195,7 +204,6 @@ public class CalendarController {
     	ld = LocalDate.now();
     	setCalendar(ld);
     	
-    	ObservableList<String> pItems = FXCollections.observableArrayList();
     	pItems.addAll(pdao.find());
     	pp.setItems(pItems);
     }
@@ -239,11 +247,12 @@ public class CalendarController {
 	        	if(colStr==null) {
 	        		colStr="#FFFFFF";
 	        	}
-	        	Color col = Color.valueOf(colStr);
+	        	var rx = "^0x";
+	        	if(Pattern.matches(rx, colStr)) {
+	        		colStr.replaceAll("[\\da-f]{8}","#$0");
+	        	}
 	        	var toDoLabel = new Label(data.titleProperty().get());
-	        	toDoLabel.getStyleClass().add("toDoLabel");
-	        	System.out.println(colStr);
-	        	toDoLabel.setBackground(new Background(new BackgroundFill(col, null, null)));
+	        	toDoLabel.setStyle("-fx-text-fill: #006464; -fx-border-radius: 20; -fx-background-radius: 20; -fx-background-color: " +colStr+";"); 
 	    	    vb.getChildren().add(toDoLabel);
 	        }
 	        calendarMatrix.add(vb, column, row);
@@ -253,6 +262,17 @@ public class CalendarController {
 		    } else {
 		      column++;
 		    }
+		    
+		    //パッケージと色の表
+		    packColor.setCellFactory(new Callback<ListView<PackAndColorData>, ListCell<PackAndColorData>>() { // (1)
+	            @Override
+	            public ListCell<PackAndColorData> call(ListView<PackAndColorData> listView) {
+	                return new PackageAndColorCell();
+	            }
+	        });
+	        ObservableList<PackAndColorData> datas = FXCollections.observableArrayList();
+	        datas.addAll(pdao.findAll());
+	        packColor.setItems(datas);
 	  }
 	  
 	  //月ラベルに値を設定

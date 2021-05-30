@@ -110,7 +110,6 @@ public class ScheduleEditSelectController {
 	    	sMinute.setValue(Integer.toString(AddDataAndLabel.startTime.get().getMinute()));
 	    	fHour.setValue(Integer.toString(AddDataAndLabel.finishTime.get().getHour()));
 	    	fMinute.setValue(Integer.toString(AddDataAndLabel.finishTime.get().getMinute()));
-	    	System.out.println(year.getEditor());
 	    	
 	    	ObservableList<String> pItems = FXCollections.observableArrayList();
 	    	pItems.addAll(pdao.find());

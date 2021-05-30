@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -46,19 +49,40 @@ public class PackageEditController {
 
     @FXML
     void tuika(MouseEvent event) {
-    	pdao.insert(sinki.getText());
-    	oList.add(sinki.getText());
+    	if(pdao.compare(sinki.getText())) {
+    		pdao.insert(sinki.getText());
+        	pdao.setColors(sinki.getText(), "#888888");
+        	oList.add(sinki.getText());
+    	}
     }
     
     @FXML
     void execute(MouseEvent event) {
-    	if(!ato.getText().equals(null)) {
-    		pdao.update(moto.getText(), ato.getText());
-    		oList.removeAll(moto.getText());
-    		oList.addAll(ato.getText());
+    	if(!ato.getText().equals("\s*")) {
+    		if(pdao.compare(ato.getText())) {
+    			pdao.update(moto.getText(), ato.getText());
+        		oList.removeAll(moto.getText());
+        		oList.addAll(ato.getText());
+    		}
+    	}else {
+    		System.out.println("変更後の名前を入力してください。");
     	}
     }
     
+
+    @FXML
+    void sakujo(MouseEvent event) {
+    		var alert = new Alert(AlertType.WARNING,"削除する？",ButtonType.OK,ButtonType.CANCEL);
+    		alert.showAndWait().ifPresent(response -> {
+    			if(response == ButtonType.OK) {
+    				pdao.delete(moto.getText());
+    				oList.removeAll(moto.getText());
+    				alert.close();
+    			}else {
+    				alert.close();
+    			}
+    		});
+    }
 
 
     @FXML

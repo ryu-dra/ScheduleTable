@@ -32,6 +32,25 @@ public class PackagesDAO {
 		return list;
 	}
 	
+	public ArrayList<PackAndColorData> findAll(){
+		ArrayList<PackAndColorData> list = new ArrayList<PackAndColorData>();
+		try{
+			PreparedStatement stmt = con.prepareStatement("SELECT * from packages");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				String packageSelect = rs.getString("package_");
+				String color = rs.getString("colors");
+				list.add(new PackAndColorData(packageSelect, color));
+			}
+			rs.close();
+			stmt.close();
+		}
+		catch (SQLException e) {
+			System.out.println("SELECTエラー：" + e.getMessage());
+		}
+		return list;
+	}
 	
 	public void insert(String pack) {
 		try{
@@ -133,5 +152,15 @@ public class PackagesDAO {
 			System.out.println("SELECTエラー：" + e.getMessage());
 		}
 		return str;
+	}
+	
+	public boolean compare(String newPack) {
+		var datas = find();
+		for(var data : datas) {
+			if(newPack.equals(data)){
+				return false;
+			}
+		}
+		return true;
 	}
 }

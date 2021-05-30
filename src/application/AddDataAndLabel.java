@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.regex.Pattern;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.StringProperty;
@@ -21,6 +22,9 @@ public class AddDataAndLabel implements CreateDataAndLabel {
 	public static ObjectProperty<LocalTime> startTime ;
     public static ObjectProperty<LocalTime> finishTime;
     public static Stage stage;
+    
+    private ScheduleConnection scn = new ScheduleConnection();
+   	private PackagesDAO pdao = new PackagesDAO(scn.getConnection());
 
 	@Override
 	public ScheduleData addData(ComboBox<String> packageSelect,ComboBox<String> year,ComboBox<String> month,ComboBox<String> day,TextField scheduleName,ComboBox<String> sHour,ComboBox<String> sMinute,ComboBox<String> fHour,ComboBox<String> fMinute,AnchorPane scheduleSelect,TextArea memo) {
@@ -45,13 +49,23 @@ public class AddDataAndLabel implements CreateDataAndLabel {
  	    double tNum = ftNum-stNum;
  		String str = data.titleProperty().get()+"\n"+data.getTime()+"\n"+data.detailProperty().get();
  		sLabel.setText(str);
+ 		
+ 		String colStr = pdao.findColor(data.packageSelectProperty().get());
+ 		if(colStr==null) {
+    		colStr="#FFFFFF";
+    	}
+    	var rx = "^0x";
+    	if(Pattern.matches(rx, colStr)) {
+    		colStr.replaceAll("[\\da-f]{8}","#$0");
+    	}
+ 		sLabel.setStyle("-fx-text-fill: #006464; -fx-background-color: " +colStr+";");
+ 		
  		sLabel.setOnMouseClicked(event -> {
 			try {
 				titleOfLabel = data.titleProperty();
 				startTime = data.startTimeProperty();
 				finishTime = data.finishTimeProperty();
 				showEditWindow();
-				sLabel.setVisible(false);
 				
 			} catch (IOException e) {
 				// TODO 自動生成された catch ブロック
