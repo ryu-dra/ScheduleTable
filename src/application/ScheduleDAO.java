@@ -213,6 +213,17 @@ public class ScheduleDAO {
 	
 	public void insert(ScheduleData sd) {
 		try{
+			String packSql1 = "SELECT package_ FROM packages WHERE package_ = ?";
+			PreparedStatement p1 = con.prepareStatement(packSql1);
+			p1.setString(1, sd.packageSelectProperty().get());
+			ResultSet rs = p1.executeQuery();
+			while (rs.next()) {
+				String packageSelect = rs.getString("package_");
+				if(packageSelect != null) {
+					System.out.println("重複するパッケージが存在します。");
+					return;
+				}
+			}
 			
 			String sql = "INSERT INTO datatable VALUES(?,?,?,?,?,?)";
 			PreparedStatement stmt = con.prepareStatement(sql);

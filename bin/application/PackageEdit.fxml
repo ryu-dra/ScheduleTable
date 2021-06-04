@@ -20,8 +20,7 @@
             <Label layoutX="76.0" layoutY="44.0" prefHeight="17.0" prefWidth="41.0" text="変更前" />
             <Label layoutX="76.0" layoutY="100.0" prefHeight="17.0" prefWidth="41.0" text="変更後" />
             <TextField fx:id="ato" layoutX="22.0" layoutY="132.0" />
-            <Button layoutX="36.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#execute" text="実行" />
-            <Button layoutX="115.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#sakujo" prefHeight="25.0" prefWidth="43.0" text="削除" />
+            <Button layoutX="70.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#execute" text="実行" />
          </children>
       </AnchorPane>
    </left>

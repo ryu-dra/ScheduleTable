@@ -29,6 +29,13 @@
 	-fx-background-color:  rgba(119,136,153,0.5);
 }
 
+.toDoLabel{
+	-fx-text-fill: #006464;
+    -fx-background-color: #DFB951;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
 .label_{
 	-fx-text-fill: rgba(255,255,20,1);
     -fx-background-color: rgba(	75,0,130,0.4);
