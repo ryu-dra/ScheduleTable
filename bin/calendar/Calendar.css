@@ -1,0 +1,37 @@
+
+.calendar{
+	-fx-background-image: url("file:C:/Users/user/Documents/FavoritePhotos/sekaowa1.jpg");	
+	-fx-background-repeat:stretch;	
+	-fx-background-position: center center;	
+	-fx-background-size: 400 400;
+	-fx-background-radius: 5.0;
+	-fx-border-style:  solid;
+	
+	-fx-effect: dropshadow(three-pass-box,rgba(	128,128,128,0.5),200,0.5,0,0);
+	
+	-fx-text-fill: chocolate;
+}
+
+.calendar Line {
+     -fx-stroke: rgba(	250,240,230,0.8);
+}
+
+.kuhaku{
+	-fx-background-color:  rgba(32,192,170,0.1);
+}
+
+.other{
+	-fx-background-color:  rgba(119,136,153,0.5);
+	-fx-effect: dropshadow(three-pass-box,black,10,0.5,0,0);
+}
+
+.vb{
+	-fx-background-color:  rgba(119,136,153,0.5);
+}
+
+.label_{
+	-fx-text-fill: rgba(255,255,20,1);
+    -fx-background-color: rgba(	75,0,130,0.4);
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}

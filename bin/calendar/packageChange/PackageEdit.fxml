@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calendar.packageChange.PackageEditController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="76.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#tuika" text="追加" />
+            <TextField fx:id="sinki" layoutX="26.0" layoutY="248.0" prefHeight="31.0" prefWidth="149.0" promptText="新規" />
+            <Label fx:id="moto" alignment="CENTER" layoutX="27.0" layoutY="61.0" prefHeight="39.0" prefWidth="138.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="76.0" layoutY="44.0" prefHeight="17.0" prefWidth="41.0" text="変更前" />
+            <Label layoutX="76.0" layoutY="100.0" prefHeight="17.0" prefWidth="41.0" text="変更後" />
+            <TextField fx:id="ato" layoutX="22.0" layoutY="132.0" />
+            <Button layoutX="36.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#execute" text="実行" />
+            <Button layoutX="115.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#sakujo" prefHeight="25.0" prefWidth="43.0" text="削除" />
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <ListView fx:id="list" editable="true" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
