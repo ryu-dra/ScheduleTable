@@ -9,7 +9,7 @@ public class ScheduleConnection {
 
 	public Connection getConnection(){
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/schedules", "root", "Ryu8211p");
+			con = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\user\\SQLiteDatabase\\schedules");
 		} catch (SQLException e) {
 			System.out.println("DBコネクションエラー:" + e.getMessage());
 		}

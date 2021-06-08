@@ -70,6 +70,7 @@ public class ScheduleSelectController {
 	    	adal.createScheduleLabel(editData, CalendarController.stController.getaPane());
 	    	dao.insert(editData);
 	    	pdao.insert(editData.packageSelectProperty().get());
+	    	pdao.setColors(editData.packageSelectProperty().getValue(), "#FEFEFE");
 	    	System.out.println("追加しました。");
 	    	
 	    }

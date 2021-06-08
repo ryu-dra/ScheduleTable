@@ -5,7 +5,10 @@
 package calendar;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,7 @@ public class CalendarController {
 	
 	public static LocalDate ld;
 	public static ScheduleTableController stController;
+	public static Stage imageStage;
 	
 
     @FXML // ResourceBundle that was given to the FXMLLoader
@@ -118,8 +122,17 @@ public class CalendarController {
 		primaryStage.show();
 	   }
 	 
+	   @FXML
+	    void imageEdit(MouseEvent event) throws IOException {
+		   var fxmlLoader = new FXMLLoader(getClass().getResource("ImageEdit.fxml"));
+			Scene scene = new Scene((AnchorPane)fxmlLoader.load(),400,400);	
+			imageStage = new Stage();
+			imageStage.setScene(scene);
+			imageStage.show();
+	    }
+	 
 	 @FXML
-	 void kettei(MouseEvent event) {
+	 void kettei(MouseEvent event) throws Exception, URISyntaxException {
 		 calendarMatrix.getChildren().clear();
 		 calendarMatrix.setGridLinesVisible(false);
 		 calendarMatrix.setGridLinesVisible(true);
@@ -155,38 +168,12 @@ public class CalendarController {
 	    }
 	 
 	 @FXML
-	 void reload(MouseEvent event) {
-		 ld = LocalDate.now();
-		 calendarMatrix.getChildren().clear();
-		 calendarMatrix.setGridLinesVisible(false);
-		 calendarMatrix.setGridLinesVisible(true);
-		 List<String> youbi = new ArrayList<String>(7) {
-		    	{	add("日");
-		    		add("月");
-		    		add("火");
-		    		add("水");
-		    		add("木");
-		    		add("金");
-		    		add("土");
-	    		
-	    		}
-	    	};
-	    	
-	    	for(int i=0; i<7; i++) {
-	    		Label label = new Label(youbi.get(i));
-	    		label.setAlignment(Pos.CENTER);
-	    		calendarMatrix.add(label, i,0);
-	    		label.getStyleClass().add("label_");
-	    		label.setPrefWidth(Integer.MAX_VALUE);
-	    	}
-		 setCalendar(ld);
-		 
-		 pItems.clear();
-		 pItems.addAll(pdao.find());
+	 void reload(MouseEvent event) throws Exception, Exception {
+		 initialize();
 	 }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
-    void initialize() {
+    void initialize() throws IOException, URISyntaxException {
     	List<String> youbi = new ArrayList<String>(7) {
 	    	{	add("日");
 	    		add("月");
@@ -216,7 +203,7 @@ public class CalendarController {
     
     
     @SuppressWarnings("static-access")
-	private void setCalendar(LocalDate ld) {
+	private void setCalendar(LocalDate ld) throws IOException, URISyntaxException {
     	calendarMatrix.setGridLinesVisible(true);
      year = ld.getYear();
      month = ld.getMonthValue();
@@ -283,6 +270,19 @@ public class CalendarController {
 	  
 	  //月ラベルに値を設定
 	  tuki.setText(String.valueOf(month)+"月");
+	  
+	  var str = "";
+	  
+	  try(var reader = Files.newBufferedReader(
+			  Paths.get(this.getClass().getResource("calendarImage.txt").toURI()))){
+		  var line = "";
+		  while((line = reader.readLine()) != null) {
+			  str = line;
+		  }
+	  }
+	  
+	  
+	  calendarMatrix.setStyle("-fx-background-image: url(file:"+str+");-fx-background-repeat:stretch;	-fx-background-position: center center;	-fx-background-size: 400 400;-fx-background-radius: 5.0;-fx-border-style:  solid;-fx-effect: dropshadow(three-pass-box,rgba(128,128,128,0.5),200,0.5,0,0);-fx-text-fill: chocolate;");
     }
     
     void showScheduleTable() throws IOException  {

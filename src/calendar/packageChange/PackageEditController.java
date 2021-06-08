@@ -53,7 +53,7 @@ public class PackageEditController {
     void tuika(MouseEvent event) {
     	if(pdao.compare(sinki.getText())) {
     		pdao.insert(sinki.getText());
-        	pdao.setColors(sinki.getText(), "#888888");
+        	pdao.setColors(sinki.getText(), "#FEFEFE");
         	oList.add(sinki.getText());
     	}
     }

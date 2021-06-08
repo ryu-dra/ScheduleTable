@@ -19,15 +19,11 @@
             </Label>
          </items>
       </ToolBar>
-      <AnchorPane prefHeight="111.0" prefWidth="130.0">
+      <AnchorPane fx:id="ap" prefHeight="111.0" prefWidth="130.0">
          <children>
             <Button alignment="CENTER" layoutX="86.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#sets" prefHeight="25.0" prefWidth="41.0" text="+" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="2.0" />
-            <ImageView fitHeight="111.0" fitWidth="94.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../img/raina-.jpg" />
-               </image>
-            </ImageView>
-         </children>
+            <Label fx:id="image" layoutX="14.0" layoutY="29.0" prefHeight="77.0" prefWidth="103.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="29.0" />
+             </children>
       </AnchorPane>
       <ScrollPane prefHeight="390.0" prefWidth="130.0" vbarPolicy="ALWAYS">
          <content>
