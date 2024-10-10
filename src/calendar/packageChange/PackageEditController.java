@@ -60,7 +60,7 @@ public class PackageEditController {
     
     @FXML
     void execute(MouseEvent event) {
-    	if(!ato.getText().equals("\s*")) {
+    	if(!ato.getText().equals("\\s*")) {
     		if(pdao.compare(ato.getText())) {
     			pdao.update(moto.getText(), ato.getText());
         		oList.removeAll(moto.getText());

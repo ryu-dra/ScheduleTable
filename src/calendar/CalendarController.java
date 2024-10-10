@@ -169,6 +169,9 @@ public class CalendarController {
 	 
 	 @FXML
 	 void reload(MouseEvent event) throws Exception, Exception {
+		 calendarMatrix.getChildren().clear();
+		 calendarMatrix.setGridLinesVisible(false);
+		 calendarMatrix.setGridLinesVisible(true);
 		 initialize();
 	 }
 
@@ -215,7 +218,10 @@ public class CalendarController {
 	  lastDate = ld.lengthOfMonth();
 	      // カレンダー表を作成します。
 	  int row = 1;
-	  int column = sYoubi.getValue() ; 
+	  int column = sYoubi.getValue();		//以下で、配列の値とこの値を対応させる処理をおこなう。
+	  if(column == 7) {
+		  column = 0;			//日曜日を0とすれば、youbi<String>の配列と対応して都合がよい。
+	  }
 	  for (date = 1; date <= lastDate; date++) {
 		  VBox vb = new VBox(); 
 		  Label label = new Label(String.valueOf(date));
