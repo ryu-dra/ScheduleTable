@@ -13,25 +13,21 @@ public class ScheduleConnection {
 
 	public Connection getConnection(){
 		try {
-			con = DriverManager.getConnection("jdbc:sqlite:schedules");
+			con = DriverManager.getConnection("jdbc:sqlite:schedules.db");
 			st = con.createStatement();
-			rs = st.executeQuery("CREATE TABLE IF NOT EXISTS packages();"
-					+ "CREATE TABLE IF NOT EXISTS datatable();");
 		} catch (SQLException e) {
-						//データベースが作られていない場合、新しく作る。
-		    String url = "jdbc:sqlite:schedules";
-
-		        try (Connection conn = DriverManager.getConnection(url)) {
-		            if (conn != null) {
-		                System.out.println("データベースが作成されました:schedules ");
-		            }
-		        } catch (SQLException e_1) {
-		            System.out.println(e_1.getMessage());
-		        }
-			
+//						//データベースが作られていない場合、新しく作る。
+//		    String url = "jdbc:sqlite:schedules";
+//
+//		        try (Connection conn = DriverManager.getConnection(url)) {
+//		            if (conn != null) {
+//		                System.out.println("データベースが作成されました:schedules ");
+//		            }
+//		        } catch (SQLException e_1) {
+//		            System.out.println("作成時のエラー:"+e_1.getMessage());
+//		        }
+			System.out.println(e.getMessage());
 		}
-		
-		
 		return con;
 	}
 

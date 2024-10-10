@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import dataClass.PackAndColorData;
@@ -13,6 +14,8 @@ public class PackagesDAO {
 	
 	public PackagesDAO(Connection con) {
 		this.con = con;
+		
+
 	}
 	
 	public ArrayList<String> find(){
