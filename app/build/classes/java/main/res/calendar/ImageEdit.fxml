@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="calendar.ImageEditController">
+   <children>
+      <Label alignment="CENTER" layoutX="125.0" layoutY="23.0" prefHeight="27.0" prefWidth="127.0" text="背景画像を編集" />
+      <TabPane layoutX="88.0" layoutY="59.0" prefHeight="191.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="スケジュール表">
+            <content>
+              <AnchorPane fx:id="schedule" minHeight="0.0" minWidth="0.0" prefHeight="164.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="74.0" layoutY="101.0" mnemonicParsing="false" onMouseClicked="#sChoice" text="選択" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="カレンダー表">
+            <content>
+              <AnchorPane fx:id="calendar" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="74.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#cChoise" text="選択" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

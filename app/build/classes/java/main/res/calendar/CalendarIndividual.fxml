@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane id="calendar" fx:id="calendar" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calendar.CalendarController">
+   <center>
+      <VBox prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="hiduke" prefHeight="150.0" VBox.vgrow="NEVER">
+               <children>
+                  <Label fx:id="tuki" alignment="CENTER" text="Month" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="System Bold Italic" size="39.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <GridPane fx:id="calendarMatrix" alignment="CENTER" prefHeight="410.0" styleClass="calendar">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" prefHeight="65.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <TabPane prefWidth="150.0" styleClass="kuhaku" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="file" text="File">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" text="カレンダーを表示する（dPickerで）" AnchorPane.bottomAnchor="461.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="65.0" />
+                        <Button layoutX="15.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#toDo" prefHeight="45.0" prefWidth="120.0" text="予定一覧" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="colors" text="Colors">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ColorPicker fx:id="cp" editable="true" layoutX="12.0" layoutY="39.0" />
+                        <ComboBox fx:id="pp" layoutX="11.0" layoutY="79.0" prefHeight="25.0" prefWidth="126.0" promptText="パッケージを選択" />
+                        <Button layoutX="56.0" layoutY="127.0" mnemonicParsing="false" onMouseClicked="#tekiyou" text="適用" />
+                        <Label layoutX="48.0" layoutY="14.0" prefHeight="17.0" prefWidth="57.0" text="パッケージ" />
+                        <ListView fx:id="packColor" layoutX="13.0" layoutY="181.0" prefHeight="242.0" prefWidth="122.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Tools">
+              <content>
+                <AnchorPane fx:id="tools" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="kuhaku">
+                     <children>
+                        <Button layoutX="15.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#edit" prefHeight="45.0" prefWidth="120.0" text="タグを編集する" />
+                        <Button layoutX="26.0" layoutY="221.0" mnemonicParsing="false" onMouseClicked="#imageEdit" prefHeight="40.0" prefWidth="98.0" text="背景を編集" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </left>
+   <right>
+      <AnchorPane prefWidth="150.0" styleClass="kuhaku" BorderPane.alignment="CENTER">
+         <children>
+            <DatePicker fx:id="dp" layoutX="27.0" layoutY="59.0" prefHeight="25.0" prefWidth="112.0" promptText="表示する日付" />
+            <Button layoutX="57.0" layoutY="102.0" mnemonicParsing="false" onMouseClicked="#kettei" text="決定" />
+            <Button layoutX="51.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#reload" text="リロード" />
+         </children></AnchorPane>
+   </right>
+   <bottom>
+      <Pane prefHeight="50.0" styleClass="other" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
+
+
+
+
+
+
+
+
+
